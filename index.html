@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="Text Editor-79 Favicon Logo.png">
+    <link rel="stylesheet" href="style.css">
+    <title>79 Tech</title>
+   
+</head>
+<body>
+    <div class="notepad-container">
+        <div class="title-bar">
+            TEXT EDITOR-79
+        </div>
+        
+        <div class="menu-bar">
+            <div class="menu-item" onclick="toggleDropdown('fileDropdown')">
+                File ▼
+                <div class="dropdown" id="fileDropdown">
+                    <div class="dropdown-item" onclick="newDocument()">New</div>
+                    <div class="dropdown-item" onclick="openFile()">Open</div>
+                    <div class="dropdown-item" onclick="saveFile()">Save</div>
+                    <div class="dropdown-item" onclick="saveAsFile()">Save As</div>
+                    <div class="dropdown-item" onclick="printDocument()">Print</div>
+                </div>
+            </div>
+            
+            <div class="menu-item" onclick="toggleDropdown('editDropdown')">
+                Edit ▼
+                <div class="dropdown" id="editDropdown">
+                    <div class="dropdown-item" onclick="undoAction()">Undo</div>
+                    <div class="dropdown-item" onclick="redoAction()">Redo</div>
+                    <div class="dropdown-item" onclick="cutText()">Cut</div>
+                    <div class="dropdown-item" onclick="copyText()">Copy</div>
+                    <div class="dropdown-item" onclick="pasteText()">Paste</div>
+                    <div class="dropdown-item" onclick="selectAllText()">Select All</div>
+                    <div class="dropdown-item" onclick="findReplace()">Find & Replace</div>
+                </div>
+            </div>
+            
+            <div class="menu-item" onclick="toggleDropdown('insertDropdown')">
+                Insert ▼
+                <div class="dropdown" id="insertDropdown">
+                    <div class="dropdown-item" onclick="insertDateTime()">Date/Time</div>
+                    <div class="dropdown-item" onclick="insertSymbol()">Symbol</div>
+                </div>
+            </div>
+            
+            <div class="menu-item" onclick="toggleDropdown('viewDropdown')">
+                View ▼
+                <div class="dropdown" id="viewDropdown">
+                    <div class="dropdown-item" onclick="toggleWordWrap()">Word Wrap</div>
+                    <div class="dropdown-item" onclick="toggleFullscreen()">Fullscreen</div>
+                </div>
+            </div>
+            
+            <div class="menu-item" onclick="toggleDropdown('helpDropdown')">
+                Help ▼
+                <div class="dropdown" id="helpDropdown">
+                    <div class="dropdown-item" onclick="showAbout()">About</div>
+                    <div class="dropdown-item" onclick="showHelp()">Help</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="toolbar">
+            <div class="toolbar-btn" onclick="newDocument()" title="New Document">📄</div>
+            <div class="toolbar-btn" onclick="openFile()" title="Open">📁</div>
+            <div class="toolbar-btn" onclick="saveFile()" title="Save">💾</div>
+            <div class="toolbar-btn" onclick="printDocument()" title="Print">🖨️</div>
+            
+            <div class="separator"></div>
+            
+            <div class="toolbar-btn" onclick="cutText()" title="Cut">✂️</div>
+            <div class="toolbar-btn" onclick="copyText()" title="Copy">📋</div>
+            <div class="toolbar-btn" onclick="pasteText()" title="Paste">📎</div>
+            
+            <div class="separator"></div>
+            
+            <div class="toolbar-btn" onclick="undoAction()" title="Undo">↶</div>
+            <div class="toolbar-btn" onclick="redoAction()" title="Redo">↷</div>
+            
+            <div class="separator"></div>
+            
+            <div class="toolbar-btn" onclick="toggleFormat('bold')" id="boldBtn" title="Bold">B</div>
+            <div class="toolbar-btn" onclick="toggleFormat('italic')" id="italicBtn" title="Italic">I</div>
+            <div class="toolbar-btn" onclick="toggleFormat('underline')" id="underlineBtn" title="Underline">U</div>
+            
+            <div class="separator"></div>
+            
+            <select class="font-selector" id="fontFamily" onchange="changeFontFamily()" title="Font Family">
+                <option value="Times New Roman">Times New Roman</option>
+                <option value="Arial">Arial</option>
+                <option value="Helvetica">Helvetica</option>
+                <option value="Georgia">Georgia</option>
+                <option value="Verdana">Verdana</option>
+                <option value="Courier New">Courier New</option>
+            </select>
+            
+            <select class="font-selector" id="fontSize" onchange="changeFontSize()" title="Font Size">
+                <option value="10">10</option>
+                <option value="12">12</option>
+                <option value="14">14</option>
+                <option value="16">16</option>
+                <option value="18">18</option>
+                <option value="20">20</option>
+                <option value="24">24</option>
+                <option value="28">28</option>
+                <option value="32">32</option>
+            </select>
+            
+            <div class="toolbar-btn" onclick="toggleFullscreen()" title="Fullscreen">⛶</div>
+        </div>
+        
+        <div class="editor">
+            <textarea class="editor-content" id="editor" placeholder="Start typing your document here..."></textarea>
+        </div>
+    </div>
+    
+    <input type="file" id="fileInput" accept=".txt" onchange="handleFileOpen(event)">
+    
+    <!-- Modal for dialogs -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div id="modalContent"></div>
+            <div class="modal-buttons">
+                <button class="btn" onclick="closeModal()">Cancel</button>
+                <button class="btn btn-primary" id="modalAction">OK</button>
+            </div>
+        </div>
+    </div>
+
+   <script src="app.js"></script>
+</body>
+</html>
